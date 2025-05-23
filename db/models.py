@@ -7,18 +7,23 @@ class Turista(Base):
     id=Column(Integer, primary_key=True)
     nombre=Column(VARCHAR(30))
     correo=Column(VARCHAR(20))
-    contraseña=Column(VARCHAR(10))
     celular=Column(Integer)
+    fecha_nacimiento=Column(Date)
+    ciudad_residencia=Column(VARCHAR(20))
+    direccion=Column(VARCHAR(50))
+    identificacion=Column(Integer)
+    contraseña=Column(VARCHAR(10))
+    id_rol=Column(Integer, ForeignKey("rol.id"))
 
-class Usuario(Base):
-    __tablename__ = "usuario"
+class Administrador(Base):
+    __tablename__ = "administrador"
     id=Column(Integer, primary_key=True)
     nombre=Column(VARCHAR(30))
     correo=Column(VARCHAR(20))
-    contraseña=Column(VARCHAR(30))
     celular=Column(Integer)
+    identificacion=Column(Integer)
+    contraseña=Column(VARCHAR(10))
     id_rol=Column(Integer, ForeignKey("rol.id"))
-
 
 class Rol(Base):
     __tablename__ = "rol"
@@ -33,6 +38,7 @@ class Plan(Base):
     descripcion=Column(VARCHAR(100))
     numero_dias=Column(Integer)
     numero_noches=Column(Integer)
+    horario=Column(Date)
 
 class Reserva(Base):
     __tablename__ = "reserva"
@@ -49,47 +55,23 @@ class Favoritos(Base):
     id_turista=Column(Integer, ForeignKey("turista.id"))
     id_plan=Column(Integer, ForeignKey("plan.id"))
 
-class Novedades(Base):
-    __tablename__ = "novedades"
-    id=Column(Integer, primary_key=True)
-    titulo=Column(VARCHAR(50))
-    descripcion=Column(VARCHAR(50))
-    fecha_publicacion=Column(Date)
-    imagen=Column(Text())
-
 class Chat(Base):
     __tablename__ = "chat"
     id=Column(Integer, primary_key=True)
     estado=Column(Boolean)
-    fecha_envio=Column(Date)
-    id_usuario=Column(Integer, ForeignKey("usuario.id"))
-    id_turista=Column(Integer, ForeignKey("turista.id"))
-
-class Mensajes(Base):
-    __tablename__ = "mensajes"
-    id=Column(Integer, primary_key=True)
-    remitente=Column(VARCHAR(50))
     mensaje=Column(VARCHAR(100))
-    fecha_envio=Column(Date)
-    id_chat=Column(Integer, ForeignKey("chat.id"))
+    id_administrador=Column(Integer, ForeignKey("administrador.id"))
+    id_turista=Column(Integer, ForeignKey("turista.id"))
 
 class Informes(Base):
     __tablename__ = "informes"
     id=Column(Integer, primary_key=True)
     fecha_creacion=Column(Date)
-    hora_descripcion=Column(Date)
-    id_usuario=Column(Integer, ForeignKey("usuario.id"))
-
-class Horario(Base):
-    __tablename__ = "horario"
-    id=Column(Integer, primary_key=True)
-    fecha=Column(Date)
-    estado=Column(Boolean)
-    id_plan=Column(Integer, ForeignKey("plan.id"))
+    id_administrador=Column(Integer, ForeignKey("administrador.id"))
 
 class Notificaciones(Base):
     __tablename__ = "notificaciones"
     id=Column(Integer, primary_key=True)
     mensaje=Column(VARCHAR(50))
-    id_usuario=Column(Integer, ForeignKey("usuario.id"))
+    id_administrador=Column(Integer, ForeignKey("administrador.id"))
     id_chat=Column(Integer, ForeignKey("chat.id"))
