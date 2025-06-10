@@ -11,8 +11,8 @@ import os
 # Agrega el directorio raíz del proyecto al path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from db.database import Base, SQLALCHEMY_DATABASE_URL
-from db.models import Turista, Administrador, Rol, Plan, Reserva, Favoritos, Chat, Informes, Notificaciones
+from db import Base, MARIADB_URL
+from models import Turista, Reserva
 
 
 

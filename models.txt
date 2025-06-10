@@ -63,14 +63,14 @@ class Chat(Base):
     id_administrador=Column(Integer, ForeignKey("administrador.id"))
     id_turista=Column(Integer, ForeignKey("turista.id"))
 
-class Informes(Base):
-    __tablename__ = "informes"
+class Informe(Base):
+    __tablename__ = "informe"
     id=Column(Integer, primary_key=True)
     fecha_creacion=Column(Date)
     id_administrador=Column(Integer, ForeignKey("administrador.id"))
 
-class Notificaciones(Base):
-    __tablename__ = "notificaciones"
+class Notificacion(Base):
+    __tablename__ = "notificacion"
     id=Column(Integer, primary_key=True)
     mensaje=Column(VARCHAR(50))
     id_administrador=Column(Integer, ForeignKey("administrador.id"))
